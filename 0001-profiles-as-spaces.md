@@ -65,12 +65,13 @@ public labels for user profiles.
 Both Henri's document and MSC1769 propose to create a special alias for each
 profile room, embedding the user id in the alias in special way.
 This is problematic for a few reasons.
-First, it requires that a compliant server must check each new alias to see
+
+* First, it requires that a compliant server must check each new alias to see
 if it is in the special format, and if so, it must then check to make sure
 the new alias matches the current user's user id.
-Second, malicious users on non-compliant servers can create arbitrary aliases
+* Second, malicious users on non-compliant servers can create arbitrary aliases
 for the profiles of other users on the same server.
-Third, aliases are public, and some users may not want to advertise their
+* Third, aliases are public, and some users may not want to advertise their
 profile to the whole world.
 Circles is a privacy-focused app, so this last point is especially important
 for us.
