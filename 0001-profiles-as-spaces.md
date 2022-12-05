@@ -9,13 +9,21 @@ display name and avatar URL are now.
 Private profiles are stored in access-controlled rooms and are available
 only to the members of the room.
 
+
 ## Public Profiles
 For public profile data, we take the approach in 
 [MSC489](https://github.com/matrix-org/matrix-doc/issues/489),
 where the user's profile is a key/value store.
-This a simple extension to the standard Matrix profile; where it only
-permits two keys, `displayname` and `avatar_url`, we permit keys and
-values to be any strings with length 255 or less.
+This a simple extension to the standard Matrix profile.
+Where the Matrix spec permits only two valid keys, `displayname` and
+`avatar_url`, we permit keys and values to be any strings of length 255
+or less and consisting of characters from the set of the alphanumerics
+plus dash (0x2d), dot (0x2e), and underscore (0x2f).
+
+We propose to add one more key to the user's public profile, `profile_space`.
+The user can choose to publish a `profile_space` to advertise the room id
+for their private profile, or they may elect to omit it.
+
 
 ## Private Profiles
 Our proposed approach for private profiles builds on an earlier
@@ -28,7 +36,7 @@ with the following properties:
 
 * Room type: `org.futo.social.profile_space`
 * Join rule: `knock`
-* Encryption: Not encrypted
+* Encryption: Encrypted
 
 ### Advertising "Public" Circles
 The profile room is a Matrix Space room.
@@ -87,4 +95,10 @@ to see the profile information.
 
 
 
+## Changelog
 
+* 2022-12-05: Initial version
+
+* 2022-12-05
+  - Restricted the set of characters for keys and values in public profiles
+  - Changed profile space rooms to be encrypted
