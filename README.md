@@ -1,3 +1,4 @@
 # circles-spec
 
-Specifications for the Matrix rooms, events, etc. that Circles uses
+This repo contains specifications for the Matrix rooms, events, etc. that Circles uses.
+
