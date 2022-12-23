@@ -63,6 +63,15 @@ then Bob can also add the `profile_space` to his public profile alongside
 his display name and avatar url.
 Then any other user can find the room id and knock on his profile space.
 
+### Tracking Profile Spaces for Friends
+To keep track of all the profile spaces that the user has joined, we add a
+new space to our private "Circles" space hierarchy.
+The "My People" space is a child of the user's top-level "Circles" space.
+When we accept an invite to join a friend's profile space, we also add their
+profile room as a child of our "My People" space.
+
+The "People" tab in the Circles app uses the "My People" space to populate
+the user's list of connected users.
 
 ## Comparison to Other Approaches
 
