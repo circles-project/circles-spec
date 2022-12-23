@@ -20,3 +20,22 @@ to use a single account for both Circles and regular Matrix chat.
 |     3 | A friend's profile space        | e.g. "Bob Boggs"     | org.futo.social.profile_space | None                   | "My People"          | Invite / Knock |
 |     2 | Container for gallery rooms     | "My Photo Galleries" | m.space                       | org.futo.space.photos  | "Circles"            | Private        |
 |     3 | Gallery room                    | e.g. "Photos"        | org.futo.social.gallery       | None                   | "My Photo Galleries" | Private        |
+
+## Illustrations
+
+**Top Level Circles Space**
+![Top level Circles space](figures/space-hierarchy-top-level.png)
+
+**My Circles**
+![My Circles](figures/space-hierarchy-my-circles.png)
+
+**Friends Circle**
+![Friends Circle](figures/space-hierarchy-friends.png)
+
+**My People**
+![My People](figures/space-hierarchy-my-people.png)
+
+**Profile Space**
+![Profile Space](figures/space-hierarchy-profile-space.png)
+
+
