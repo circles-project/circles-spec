@@ -31,7 +31,9 @@ and it uses key descriptions with the following format:
         "salt": "(required) The salt for the password hash",
         "iterations": "(required) The number of iterations for the password hash",
         "bits": 256,
-    }
+    },
+    "iv": "(optional, but required for verification) AES initialization vector in unpadded base64",
+    "mac": "(optional, but required for verification) Message authentication code in unpadded base64"
 }
 ```
 
@@ -46,16 +48,38 @@ password hashing.
     "algorithm": "(required) Must be m.secret_storage.v1.aes-hmac-sha2",
     "passphrase": {
         "algorithm": "(required) Must be org.futo.bsspeke-ecc"
-    }
+    },
+    "iv": "AES initialization vector in unpadded base64",
+    "mac": "Message authentication code in unpadded base64"
+}
 ```
 
 As above, we can store this object in the user's Account Data under the key
 `m.secret_storage.key.[key ID]`.
 
+## Verifying Keys
+
+We use the `iv` and `mac` in the Key Description object to verify that we have
+the correct key.
+
+The Matrix spec describes these two properties in [11.13.1.2.1](https://spec.matrix.org/v1.6/client-server-api/#msecret_storagev1aes-hmac-sha2)
+
+> For the purposes of allowing clients to check whether a user has correctly
+> entered the key, clients should:
+>
+> 1. encrypt and MAC a message consisting of 32 bytes of 0 as described (in the section on encrypting secrets in Secret Storage),
+>    using the empty string as the info parameter to the HKDF in step 1.
+> 2. store the iv and mac in the m.secret_storage.key.[key ID] account-data.
+
+To verify that we have the correct key, we use our key to again encrypt a
+message of 32 bytes of 0, using the same `iv` from the Key Description.
+We verify that this results in the same `mac` that we got in the Key Description.
+If the two `mac`s don't match, then we have the wrong key.
+
 
 ## Deriving key ID's
 
-The Matrix spec does not specify how a client should drive the identifier for
+The Matrix spec does not specify how a client should derive the identifier for
 a key.
 Presumably they intend for the key ID's to be totally random, and for clients
 to tell which key is which by looking at the Key Description objects in the
